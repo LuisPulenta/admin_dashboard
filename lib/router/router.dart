@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/router/no_page_found_handlers.dart';
 import 'package:fluro/fluro.dart';
 import 'package:admin_dashboard/router/admin_handlers.dart';
 
@@ -22,9 +23,7 @@ class Flurorouter {
       loginRoute,
       handler: AdminHandlers.login,
     );
-    //  router.define(
-    //   registerRoute,
-    //   handler: loginHandler,
-    // );
+
+    router.notFoundHandler = NoPageFoundHandlers.noPageFound;
   }
 }

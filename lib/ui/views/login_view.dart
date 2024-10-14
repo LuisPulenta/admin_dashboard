@@ -7,7 +7,11 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: const Center(
-        child: Text("LoginView"),
+        child: Text("LoginView",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold)),
       ),
     );
   }
