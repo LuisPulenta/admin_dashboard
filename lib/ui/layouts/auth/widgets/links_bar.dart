@@ -16,19 +16,21 @@ class LinksBar extends StatelessWidget {
         children: [
           LinkText(
             text: 'About',
-            onPressed: () => {print('About')},
+            onPressed: () => {
+              //print('About')
+            },
           ),
-          LinkText(text: 'Help Center'),
-          LinkText(text: 'Terms of Aervice'),
-          LinkText(text: 'Privacy Policy'),
-          LinkText(text: 'Cooky Policy'),
-          LinkText(text: 'Ads Info'),
-          LinkText(text: 'Blog'),
-          LinkText(text: 'Status'),
-          LinkText(text: 'Careers'),
-          LinkText(text: 'Brand Resources'),
-          LinkText(text: 'Advertising'),
-          LinkText(text: 'Marketing'),
+          const LinkText(text: 'Help Center'),
+          const LinkText(text: 'Terms of Aervice'),
+          const LinkText(text: 'Privacy Policy'),
+          const LinkText(text: 'Cooky Policy'),
+          const LinkText(text: 'Ads Info'),
+          const LinkText(text: 'Blog'),
+          const LinkText(text: 'Status'),
+          const LinkText(text: 'Careers'),
+          const LinkText(text: 'Brand Resources'),
+          const LinkText(text: 'Advertising'),
+          const LinkText(text: 'Marketing'),
         ],
       ),
     );
