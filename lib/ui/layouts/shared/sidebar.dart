@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/providers/side_menu_provider.dart';
 import 'package:admin_dashboard/ui/layouts/shared/widgets/logo.dart';
 import 'package:admin_dashboard/ui/layouts/shared/widgets/menu_item.dart';
 import 'package:admin_dashboard/ui/layouts/shared/widgets/text_separator.dart';
@@ -21,23 +22,29 @@ class Sidebar extends StatelessWidget {
           ),
           const TextSeparator(text: 'main'),
           MenuItem(
-            text: 'Dashboard',
-            icon: Icons.compass_calibration_outlined,
-            isActive: false,
-            onPressed: () => print('Dashboard'),
-          ),
+              text: 'DashboardX',
+              icon: Icons.compass_calibration_outlined,
+              isActive: true,
+              onPressed: () {
+                print('Dashboard');
+                SideMenuProvider.closeMenu();
+              }),
           MenuItem(
-            text: 'Orders',
-            icon: Icons.shopping_cart_outlined,
-            isActive: false,
-            onPressed: () => print('Orders'),
-          ),
+              text: 'Orders',
+              icon: Icons.shopping_cart_outlined,
+              isActive: true,
+              onPressed: () {
+                print('Orders');
+                SideMenuProvider.closeMenu();
+              }),
           MenuItem(
-            text: 'Analytic',
-            icon: Icons.show_chart_outlined,
-            isActive: false,
-            onPressed: () => print('Analytic'),
-          ),
+              text: 'Analytic',
+              icon: Icons.show_chart_outlined,
+              isActive: true,
+              onPressed: () {
+                print('Analytic');
+                SideMenuProvider.closeMenu();
+              }),
           MenuItem(
             text: 'Categories',
             icon: Icons.layers_outlined,
