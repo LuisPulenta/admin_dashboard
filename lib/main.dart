@@ -26,6 +26,10 @@ class AppState extends StatelessWidget {
           lazy: false,
           create: (_) => AuthProvider(),
         ),
+        // ChangeNotifierProvider(
+        //   lazy: false,
+        //   create: (_) => SideMenuProvider(),
+        // ),
       ],
       child: const MyApp(),
     );

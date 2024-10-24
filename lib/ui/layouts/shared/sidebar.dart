@@ -1,4 +1,6 @@
 import 'package:admin_dashboard/providers/side_menu_provider.dart';
+import 'package:admin_dashboard/router/router.dart';
+import 'package:admin_dashboard/services/navigation_services.dart';
 import 'package:admin_dashboard/ui/layouts/shared/widgets/logo.dart';
 import 'package:admin_dashboard/ui/layouts/shared/widgets/menu_item.dart';
 import 'package:admin_dashboard/ui/layouts/shared/widgets/text_separator.dart';
@@ -7,8 +9,15 @@ import 'package:flutter/material.dart';
 class Sidebar extends StatelessWidget {
   const Sidebar({Key? key}) : super(key: key);
 
+  void navigateTo(String routeName) {
+    NavigationServices.navigateTo(routeName);
+    SideMenuProvider.closeMenu();
+  }
+
   @override
   Widget build(BuildContext context) {
+    //final sideMenuProvider =Provider.of<SideMenuProvider>(context, listen: true);
+
     return Container(
       width: 200,
       height: double.infinity,
@@ -20,19 +29,18 @@ class Sidebar extends StatelessWidget {
           const SizedBox(
             height: 50,
           ),
-          const TextSeparator(text: 'main'),
+          const TextSeparator(text: 'Main'),
           MenuItem(
-              text: 'DashboardX',
-              icon: Icons.compass_calibration_outlined,
-              isActive: true,
-              onPressed: () {
-                print('Dashboard');
-                SideMenuProvider.closeMenu();
-              }),
+            text: 'DashboardX',
+            icon: Icons.compass_calibration_outlined,
+            isActive: true,
+            //sideMenuProvider.currentPage == Flurorouter.dashboardRoute,
+            onPressed: () => navigateTo(Flurorouter.dashboardRoute),
+          ),
           MenuItem(
               text: 'Orders',
               icon: Icons.shopping_cart_outlined,
-              isActive: true,
+              isActive: false,
               onPressed: () {
                 print('Orders');
                 SideMenuProvider.closeMenu();
@@ -40,7 +48,7 @@ class Sidebar extends StatelessWidget {
           MenuItem(
               text: 'Analytic',
               icon: Icons.show_chart_outlined,
-              isActive: true,
+              isActive: false,
               onPressed: () {
                 print('Analytic');
                 SideMenuProvider.closeMenu();
@@ -76,8 +84,9 @@ class Sidebar extends StatelessWidget {
           MenuItem(
             text: 'Icons',
             icon: Icons.list_alt_outlined,
-            isActive: false,
-            onPressed: () => print('Analytic'),
+            isActive: true,
+            //sideMenuProvider.currentPage == Flurorouter.iconsRoute,
+            onPressed: () => navigateTo(Flurorouter.iconsRoute),
           ),
           MenuItem(
             text: 'Marketing',
@@ -97,6 +106,10 @@ class Sidebar extends StatelessWidget {
             isActive: false,
             onPressed: () => print('Products'),
           ),
+          const SizedBox(
+            height: 50,
+          ),
+          const TextSeparator(text: 'Exit'),
           MenuItem(
             text: 'Logout',
             icon: Icons.exit_to_app_outlined,
