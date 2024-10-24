@@ -20,7 +20,7 @@ class BlankView extends StatelessWidget {
           ),
           const WhiteCard(
             title: "Sales Statistics",
-            child: Text('Hola Mundo'),
+            child: Text('BlankView'),
           ),
         ],
       ),

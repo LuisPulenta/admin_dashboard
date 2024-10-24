@@ -105,10 +105,10 @@ class Sidebar extends StatelessWidget {
             onPressed: () => print('Products'),
           ),
           MenuItem(
-            text: 'Black',
+            text: 'Blank',
             icon: Icons.post_add_outlined,
-            isActive: false,
-            onPressed: () => print('Products'),
+            isActive: sideMenuProvider.currentPage == Flurorouter.blankRoute,
+            onPressed: () => navigateTo(Flurorouter.blankRoute),
           ),
           const SizedBox(
             height: 50,
