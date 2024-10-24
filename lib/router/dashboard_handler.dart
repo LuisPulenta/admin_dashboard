@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 class DashboardHandlers {
   static Handler dashboard = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
-    //Provider.of<SideMenuProvider>(context, listen: false).setCurrentPageUrl(Flurorouter.dashboardRoute);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.dashboardRoute);
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return const DashboardView();
     } else {
@@ -20,7 +21,8 @@ class DashboardHandlers {
 
   static Handler icons = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
-    //Provider.of<SideMenuProvider>(context, listen: false).setCurrentPageUrl(Flurorouter.iconsRoute);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.iconsRoute);
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return const IconsView();
     } else {
