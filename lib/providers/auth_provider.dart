@@ -1,7 +1,9 @@
 import 'package:admin_dashboard/api/cafe_api.dart';
+import 'package:admin_dashboard/models/http/auth_response.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:admin_dashboard/services/navigation_services.dart';
+import 'package:admin_dashboard/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 
 enum AuthStatus {
@@ -13,6 +15,7 @@ enum AuthStatus {
 class AuthProvider extends ChangeNotifier {
   String? _token;
   AuthStatus authStatus = AuthStatus.checking;
+  Usuario? user;
 
   AuthProvider() {
     isAuthenticated();
@@ -20,17 +23,23 @@ class AuthProvider extends ChangeNotifier {
 
 //---------------------------------------------------------------
   login(String email, String password) {
-    //TODO: Petición HTTP
-    _token = 'abcdefgh12345678';
-    LocalStorage.prefs.setString('token', _token!);
+    final data = {
+      "correo": email,
+      "password": password,
+    };
 
-    print(LocalStorage.prefs.getString('token'));
+    CafeApi.post('/auth/login', data).then((json) {
+      final authResponse = AuthResponse.fromMap(json);
+      user = authResponse.usuario;
 
-    //TODO: Navegar al Dashboard
-    authStatus = AuthStatus.authenticated;
-    notifyListeners();
-
-    NavigationServices.replaceTo(Flurorouter.dashboardRoute);
+      authStatus = AuthStatus.authenticated;
+      LocalStorage.prefs.setString('token', authResponse.token);
+      NavigationServices.replaceTo(Flurorouter.dashboardRoute);
+      CafeApi.configureDio();
+      notifyListeners();
+    }).catchError((e) {
+      NotificationsService.showSnackbarError("Credenciales no válidas");
+    });
   }
 
 //---------------------------------------------------------------
@@ -42,10 +51,16 @@ class AuthProvider extends ChangeNotifier {
     };
 
     CafeApi.post('/usuarios', data).then((json) {
-      print(json);
+      final authResponse = AuthResponse.fromMap(json);
+      user = authResponse.usuario;
+
+      authStatus = AuthStatus.authenticated;
+      LocalStorage.prefs.setString('token', authResponse.token);
+      NavigationServices.replaceTo(Flurorouter.dashboardRoute);
+      CafeApi.configureDio();
+      notifyListeners();
     }).catchError((e) {
-      print('error en $e');
-      //TODO: Mostrar notificación de error
+      NotificationsService.showSnackbarError("Credenciales no válidas");
     });
   }
 
@@ -59,11 +74,27 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
 
-    //TODO: ir al backend y comprobar si el JWT es válido
+    try {
+      final resp = await CafeApi.httpGet('/auth');
+      final authResponse = AuthResponse.fromMap(resp);
+      LocalStorage.prefs.setString('token', authResponse.token);
+      user = authResponse.usuario;
+      authStatus = AuthStatus.authenticated;
+      CafeApi.configureDio();
+      notifyListeners();
+      return true;
+    } catch (e) {
+      print(e);
+      authStatus = AuthStatus.notAuthenticated;
+      notifyListeners();
+      return false;
+    }
+  }
 
-    await Future.delayed(const Duration(milliseconds: 1000));
-    authStatus = AuthStatus.authenticated;
+  //---------------------------------------------------------------
+  logout() {
+    LocalStorage.prefs.remove('token');
+    authStatus = AuthStatus.notAuthenticated;
     notifyListeners();
-    return true;
   }
 }
