@@ -1,4 +1,5 @@
 import 'package:admin_dashboard/api/cafe_api.dart';
+import 'package:admin_dashboard/providers/categories_provider.dart';
 import 'package:admin_dashboard/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,9 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           lazy: false,
           create: (_) => SideMenuProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CategoriesProvider(),
         ),
       ],
       child: const MyApp(),

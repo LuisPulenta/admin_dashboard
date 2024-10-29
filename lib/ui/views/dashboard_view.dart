@@ -14,6 +14,7 @@ class DashboardView extends StatelessWidget {
     Usuario user = authProvider.user!;
 
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ListView(
         physics: const ClampingScrollPhysics(),
         children: [
