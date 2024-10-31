@@ -14,4 +14,18 @@ class CategoriesProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future newCategory(String name) async {
+    final data = {'nombre': name};
+
+    try {
+      final resp = await CafeApi.post('/categorias', data);
+      final newCategory = Categoria.fromJson(resp);
+
+      categories.add(newCategory);
+      notifyListeners();
+    } catch (e) {
+      print('Error al crear Categoría');
+    }
+  }
 }

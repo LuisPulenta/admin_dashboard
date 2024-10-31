@@ -20,7 +20,7 @@ class DashboardView extends StatelessWidget {
         children: [
           Text(
             "DashboardView",
-            style: CustonLabels.h1,
+            style: CustomLabels.h1,
           ),
           const SizedBox(
             height: 10,

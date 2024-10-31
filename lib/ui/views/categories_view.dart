@@ -3,6 +3,7 @@ import 'package:admin_dashboard/models/http/category.dart';
 import 'package:admin_dashboard/providers/categories_provider.dart';
 import 'package:admin_dashboard/ui/buttons/custom_icon_button.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
+import 'package:admin_dashboard/ui/modals/category_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +34,7 @@ class _CategoriesViewState extends State<CategoriesView> {
         children: [
           Text(
             "Categories",
-            style: CustonLabels.h1,
+            style: CustomLabels.h1,
           ),
           const SizedBox(
             height: 10,
@@ -59,7 +60,15 @@ class _CategoriesViewState extends State<CategoriesView> {
               CustomIconButton(
                 icon: Icons.add_outlined,
                 text: "Nueva Categoría",
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (_) => const CategoryModal(
+                      categoria: null,
+                    ),
+                  );
+                },
               ),
               CustomIconButton(
                 icon: Icons.car_crash,

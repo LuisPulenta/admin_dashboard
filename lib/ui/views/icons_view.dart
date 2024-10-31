@@ -14,7 +14,7 @@ class IconsView extends StatelessWidget {
         children: [
           Text(
             "Icons",
-            style: CustonLabels.h1,
+            style: CustomLabels.h1,
           ),
           const SizedBox(
             height: 10,
