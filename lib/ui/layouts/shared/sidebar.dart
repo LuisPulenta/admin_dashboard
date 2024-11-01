@@ -79,10 +79,10 @@ class Sidebar extends StatelessWidget {
             onPressed: () => print('Discount'),
           ),
           MenuItem(
-            text: 'Customers',
+            text: 'Users',
             icon: Icons.people_outline_outlined,
-            isActive: false,
-            onPressed: () => print('Customers'),
+            isActive: sideMenuProvider.currentPage == Flurorouter.usersRoute,
+            onPressed: () => navigateTo(Flurorouter.usersRoute),
           ),
           const SizedBox(
             height: 30,
