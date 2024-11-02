@@ -31,14 +31,27 @@ class _UsersViewState extends State<UsersView> {
             height: 10,
           ),
           PaginatedDataTable(
-            columns: const [
-              DataColumn(label: Text("Avatar")),
-              DataColumn(label: Text("Nombre")),
-              DataColumn(label: Text("Email")),
-              DataColumn(label: Text("UID")),
-              DataColumn(label: Text("Acciones")),
+            sortAscending: usersProvider.ascending,
+            sortColumnIndex: usersProvider.sortColumnIndex,
+            columns: [
+              const DataColumn(label: Text("Avatar")),
+              DataColumn(
+                  label: const Text("Nombre"),
+                  onSort: (colIndex, _) {
+                    usersProvider.sortColumnIndex = colIndex;
+                    usersProvider.sort<String>((user) => user.nombre);
+                  }),
+              DataColumn(
+                  label: const Text("Email"),
+                  onSort: (colIndex, _) {
+                    usersProvider.sortColumnIndex = colIndex;
+                    usersProvider.sort<String>((user) => user.correo);
+                  }),
+              const DataColumn(label: Text("UID")),
+              const DataColumn(label: Text("Acciones")),
             ],
             source: UsersDTS(usersProvider.users, context),
+            onPageChanged: (page) {},
             header: const Text(
               "Esta es la Lista de todos los Usuarios",
               maxLines: 2,
