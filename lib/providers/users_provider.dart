@@ -13,6 +13,7 @@ class UsersProvider extends ChangeNotifier {
     getPaginatedUsers();
   }
 
+  //---------------------------------------------------------------
   getPaginatedUsers() async {
     final resp = await CafeApi.httpGet('/usuarios?limite=100&desde=0');
     final userResp = UsersResponse.fromJson(resp);
@@ -22,6 +23,7 @@ class UsersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //---------------------------------------------------------------
   void sort<T>(Comparable<T> Function(Usuario user) getField) {
     users.sort((a, b) {
       final aValue = getField(a);
@@ -32,5 +34,16 @@ class UsersProvider extends ChangeNotifier {
     });
     ascending = !ascending;
     notifyListeners();
+  }
+
+  //---------------------------------------------------------------
+  Future<Usuario> getUserById(String uid) async {
+    try {
+      final resp = await CafeApi.httpGet('/usuarios/$uid');
+      final user = Usuario.fromMap(resp);
+      return user;
+    } catch (e) {
+      throw e;
+    }
   }
 }
