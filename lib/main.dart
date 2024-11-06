@@ -1,5 +1,6 @@
 import 'package:admin_dashboard/api/cafe_api.dart';
 import 'package:admin_dashboard/providers/categories_provider.dart';
+import 'package:admin_dashboard/providers/user_form_provider.dart';
 import 'package:admin_dashboard/providers/users_provider.dart';
 import 'package:admin_dashboard/services/notifications_service.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,9 @@ class AppState extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => UsersProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserFormProvider(),
         ),
       ],
       child: const MyApp(),
