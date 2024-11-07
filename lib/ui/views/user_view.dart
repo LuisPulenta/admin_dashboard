@@ -1,11 +1,13 @@
 import 'package:admin_dashboard/models/http/usuario.dart';
 import 'package:admin_dashboard/providers/user_form_provider.dart';
 import 'package:admin_dashboard/providers/users_provider.dart';
+import 'package:admin_dashboard/services/navigation_services.dart';
 import 'package:admin_dashboard/services/notifications_service.dart';
 import 'package:admin_dashboard/ui/cards/white_card.dart';
 import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,11 +30,23 @@ class _UserViewState extends State<UserView> {
         Provider.of<UserFormProvider>(context, listen: false);
 
     usersProvider.getUserById(widget.uid).then((userDB) {
-      setState(() {
-        userFormProvider.user = userDB;
-        user = userDB;
-      });
+      if (userDB != null) {
+        setState(() {
+          userFormProvider.user = userDB;
+          userFormProvider.formKey = GlobalKey<FormState>();
+          user = userDB;
+        });
+      } else {
+        NavigationServices.replaceTo('/dashboard/users');
+      }
     });
+  }
+
+  @override
+  void dispose() {
+    user = null;
+    Provider.of<UserFormProvider>(context, listen: false).user = null;
+    super.dispose();
   }
 
   //------------------------------------------------------------------------------
@@ -238,8 +252,22 @@ class _AvatarContainer extends StatelessWidget {
                               Icons.camera_alt_outlined,
                               size: 20,
                             ),
-                            onPressed: () {
-                              //TODO Seleccionar la imagen
+                            onPressed: () async {
+                              FilePickerResult? result =
+                                  await FilePicker.platform.pickFiles(
+                                type: FileType.custom,
+                                allowedExtensions: ['jpg', 'jpeg', 'png'],
+                                allowMultiple: false,
+                              );
+                              if (result != null) {
+                                PlatformFile file = result.files.first;
+                                print(file.name);
+                                print(file.bytes);
+                                print(file.size);
+                                print(file.extension);
+                              } else {
+                                print("User canceled the picker");
+                              }
                             },
                           ),
                         ),

@@ -19,8 +19,7 @@ class CafeApi {
     try {
       final resp = await _dio.get(path);
       return resp.data;
-    } catch (e) {
-      print(e);
+    } on DioError catch (e) {
       throw ('Error en el GET');
     }
   }
