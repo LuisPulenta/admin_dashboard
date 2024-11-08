@@ -210,6 +210,12 @@ class _AvatarContainer extends StatelessWidget {
     final userFormProvider = Provider.of<UserFormProvider>(context);
     final user = userFormProvider.user!;
 
+    final image = (user.img == null)
+        ? const Image(
+            image: AssetImage('no-image.jpg'),
+          )
+        : FadeInImage.assetNetwork(placeholder: 'loader.gif', image: user.img!);
+
     return WhiteCard(
         width: 250,
         child: Container(
@@ -230,10 +236,8 @@ class _AvatarContainer extends StatelessWidget {
                   height: 160,
                   child: Stack(
                     children: [
-                      const ClipOval(
-                        child: Image(
-                          image: AssetImage('no-image.jpg'),
-                        ),
+                      ClipOval(
+                        child: image,
                       ),
                       Positioned(
                         bottom: 5,
@@ -260,11 +264,20 @@ class _AvatarContainer extends StatelessWidget {
                                 allowMultiple: false,
                               );
                               if (result != null) {
+                                NotificationsService.showBusyIndicator(context);
+
                                 PlatformFile file = result.files.first;
-                                print(file.name);
-                                print(file.bytes);
-                                print(file.size);
-                                print(file.extension);
+
+                                final newUser =
+                                    await userFormProvider.uploadImage(
+                                        '/uploads/usuarios/${user.uid}',
+                                        file.bytes!);
+
+                                Provider.of<UsersProvider>(context,
+                                        listen: false)
+                                    .refreshUser(newUser);
+
+                                Navigator.of(context).pop();
                               } else {
                                 print("User canceled the picker");
                               }
