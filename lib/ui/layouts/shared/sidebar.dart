@@ -15,11 +15,13 @@ import 'package:admin_dashboard/ui/layouts/shared/widgets/text_separator.dart';
 class Sidebar extends StatelessWidget {
   const Sidebar({Key? key}) : super(key: key);
 
+//------------------------------------------------------------------------
   void navigateTo(String routeName) {
     NavigationServices.replaceTo(routeName);
     SideMenuProvider.closeMenu();
   }
 
+//------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     final sideMenuProvider = Provider.of<SideMenuProvider>(context);

@@ -24,10 +24,10 @@ class CustomIconButton extends StatelessWidget {
           const StadiumBorder(),
         ),
         backgroundColor: MaterialStateProperty.all(
-          color.withOpacity(0.5),
+          color.withOpacity(0.8),
         ),
         overlayColor: MaterialStateProperty.all(
-          color.withOpacity(0.3),
+          color.withOpacity(1),
         ),
       ),
       onPressed: () => onPressed(),

@@ -53,6 +53,36 @@ class IconsView extends StatelessWidget {
                 width: 170,
                 child: Center(child: Icon(Icons.settings_outlined)),
               ),
+              WhiteCard(
+                title: "watch_later_outlined",
+                width: 170,
+                child: Center(child: Icon(Icons.watch_later_outlined)),
+              ),
+              WhiteCard(
+                title: "car_rental_outlined",
+                width: 170,
+                child: Center(child: Icon(Icons.car_rental_outlined)),
+              ),
+              WhiteCard(
+                title: "mouse_outlined",
+                width: 170,
+                child: Center(child: Icon(Icons.mouse_outlined)),
+              ),
+              WhiteCard(
+                title: "mode_comment_outlined",
+                width: 170,
+                child: Center(child: Icon(Icons.mode_comment_outlined)),
+              ),
+              WhiteCard(
+                title: "wifi",
+                width: 170,
+                child: Center(child: Icon(Icons.wifi)),
+              ),
+              WhiteCard(
+                title: "animation_outlined",
+                width: 170,
+                child: Center(child: Icon(Icons.animation_outlined)),
+              ),
             ],
           )
         ],

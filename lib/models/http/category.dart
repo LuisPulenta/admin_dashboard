@@ -22,6 +22,7 @@ class Categoria {
       };
 }
 
+//----------------------------------------------------------------------
 class CategoriaUsuario {
   String id;
   String nombre;

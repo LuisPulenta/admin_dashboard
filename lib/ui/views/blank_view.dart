@@ -13,15 +13,15 @@ class BlankView extends StatelessWidget {
         physics: const ClampingScrollPhysics(),
         children: [
           Text(
-            "BlankView",
+            "BLANKVIEW",
             style: CustomLabels.h1,
           ),
           const SizedBox(
             height: 10,
           ),
           const WhiteCard(
-            title: "Sales Statistics",
-            child: Text('BlankView'),
+            title: "Tìtulo",
+            child: Text('Contenido del WhiteCard'),
           ),
         ],
       ),

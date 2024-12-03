@@ -14,7 +14,7 @@ enum AuthStatus {
 }
 
 class AuthProvider extends ChangeNotifier {
-  String? _token;
+  String? token;
   AuthStatus authStatus = AuthStatus.checking;
   Usuario? user;
 
@@ -35,6 +35,7 @@ class AuthProvider extends ChangeNotifier {
 
       authStatus = AuthStatus.authenticated;
       LocalStorage.prefs.setString('token', authResponse.token);
+      token = authResponse.token;
       NavigationServices.replaceTo(Flurorouter.dashboardRoute);
       CafeApi.configureDio();
       notifyListeners();

@@ -17,12 +17,14 @@ class CategoriesView extends StatefulWidget {
 class _CategoriesViewState extends State<CategoriesView> {
   int _rowsPerPage = PaginatedDataTable.defaultRowsPerPage;
 
+//-----------------------------------------------------------------------
   @override
   void initState() {
     super.initState();
     Provider.of<CategoriesProvider>(context, listen: false).getCategories();
   }
 
+//-----------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     List<Categoria> categorias =

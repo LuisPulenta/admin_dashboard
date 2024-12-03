@@ -14,6 +14,13 @@ class CategoriesProvider extends ChangeNotifier {
 
     categories = [...categoriesResp.categorias];
 
+    categories.sort((a, b) {
+      return a.nombre
+          .toString()
+          .toLowerCase()
+          .compareTo(b.nombre.toString().toLowerCase());
+    });
+
     notifyListeners();
   }
 

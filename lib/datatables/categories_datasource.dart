@@ -50,8 +50,10 @@ class CategoriesDTS extends DataTableSource {
                         onPressed: () async {
                           await Provider.of<CategoriesProvider>(context,
                                   listen: false)
-                              .deleteCategory(categoria.id);
-                          Navigator.of(context).pop();
+                              .deleteCategory(categoria.id)
+                              .then(
+                                (value) => Navigator.of(context).pop(),
+                              );
                         },
                         child: const Text("Si"),
                       ),
