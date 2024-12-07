@@ -32,12 +32,24 @@ class NotificationsService {
 
   //------------------------------------------------------------------------
   static showBusyIndicator(BuildContext context) {
-    const AlertDialog dialog = AlertDialog(
+    AlertDialog dialog = AlertDialog(
       content: SizedBox(
         width: 100,
         height: 100,
         child: Center(
-          child: CircularProgressIndicator(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              CircularProgressIndicator(
+                color: Colors.indigo,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text('Por favor espere...',
+                  style: TextStyle(color: Colors.black, fontSize: 20))
+            ],
+          ),
         ),
       ),
     );

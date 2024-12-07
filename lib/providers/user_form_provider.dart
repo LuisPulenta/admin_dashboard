@@ -60,7 +60,7 @@ class UserFormProvider extends ChangeNotifier {
       notifyListeners();
       return user!;
     } catch (e) {
-      throw ('Error en user from provider');
+      throw ('Error en user form provider');
     }
   }
 }

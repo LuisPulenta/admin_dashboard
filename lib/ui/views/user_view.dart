@@ -42,6 +42,7 @@ class _UserViewState extends State<UserView> {
     });
   }
 
+  //------------------------------------------------------------------------------
   @override
   void dispose() {
     user = null;
@@ -268,16 +269,17 @@ class _AvatarContainer extends StatelessWidget {
 
                                 PlatformFile file = result.files.first;
 
-                                final newUser =
-                                    await userFormProvider.uploadImage(
+                                await userFormProvider
+                                    .uploadImage(
                                         '/uploads/usuarios/${user.uid}',
-                                        file.bytes!);
+                                        file.bytes!)
+                                    .then((newUser) {
+                                  Provider.of<UsersProvider>(context,
+                                          listen: false)
+                                      .refreshUser(newUser);
 
-                                Provider.of<UsersProvider>(context,
-                                        listen: false)
-                                    .refreshUser(newUser);
-
-                                Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                });
                               } else {
                                 print("User canceled the picker");
                               }
